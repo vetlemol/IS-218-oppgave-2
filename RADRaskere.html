@@ -14,10 +14,38 @@
   <style>
     body, html { margin: 0; padding: 0; height: 100%; }
     #map { height: 100vh; width: 100%; }
+    .legend {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    padding: 10px;
+    border: 2px solid #000;
+    z-index: 1000;
+  }
+  .legend div {
+    margin-bottom: 5px;
+  }
+  .legend span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+  .red { background: red; }
+  .blue { background: blue; }
+  .gray { background: gray; }
+  .black { background: black; }
   </style>
 </head>
 <body>
   <div id="map"></div>
+  <div class="legend">
+    <div><span class="red"></span>Kritisk truet</div>
+    <div><span class="blue"></span>Sterkt truet</div>
+    <div><span class="gray"></span>Høyt truende</div>
+    <div><span class="black"></span>Svært høyt truende</div>
+  </div>
 
   <script>
     // Initialize Supabase client
@@ -88,10 +116,20 @@
           .lte('Longitude', bounds.getEast())
           .range(from, from + chunkSize - 1); // Henter i biter av 1000 som er maks grensen til Supabase
 
+        // if (error) {
+        //   console.error(`Error fetching ${tableName} data:`, error);
+        //   return;
+        // }
         if (error) {
+          retryCount = 0;
+        if (error.code === '57014' && retryCount < 3) {
+          console.warn(`Timeout fetching ${tableName} data. Retrying... (${retryCount + 1})`);
+          return fetchAllData(tableName, bounds, clusterGroup, color, retryCount + 1);
+        } else {
           console.error(`Error fetching ${tableName} data:`, error);
           return;
         }
+      }
 
         if (data.length > 0) {
           allData = allData.concat(data);
