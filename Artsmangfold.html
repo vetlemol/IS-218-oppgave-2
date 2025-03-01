@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kristiansand Map med Clustering</title>
+  <title>Truede og truende arter</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -48,23 +48,24 @@
   </div>
 
   <script>
-    // Initialize Supabase client
+    // Kobler til Supabase databasen
     const supabaseUrl = 'https://nhlmtwcjgaosujzxjoct.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5obG10d2NqZ2Fvc3Vqenhqb2N0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkyNzUyNzQsImV4cCI6MjA1NDg1MTI3NH0.AkUp8C7cFEHctqXvuVTsumqsYZ-hSeAIb9D6xRV4zPw';
     const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-    // Initialize the map
+    // Henter kartet med senter i Kristiansand
     const map = L.map('map').setView([58.1599, 8.0182], 12);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    // Clustering layers
+    // Lager marker cluster grupper som grupperer markører
     const crKritiskCluster = L.markerClusterGroup();
     const enSterktCluster = L.markerClusterGroup();
     const highRiskCluster = L.markerClusterGroup();
     const superRiskCluster = L.markerClusterGroup();
 
+    // Legger til cluster grupper i kartet
     map.addLayer(crKritiskCluster);
     map.addLayer(enSterktCluster);
     map.addLayer(highRiskCluster);
@@ -74,7 +75,6 @@
     let drawnItems = new L.FeatureGroup();
     map.addLayer(drawnItems);
 
-    // Draw control
     const drawControl = new L.Control.Draw({
       draw: {
         polygon: false,
@@ -82,7 +82,7 @@
         circle: false,
         marker: false,
         circlemarker: false,
-        rectangle: true // Only allow rectangle selection
+        rectangle: true // Kun rektangel 
       },
       edit: {
         featureGroup: drawnItems
@@ -90,22 +90,22 @@
     });
     map.addControl(drawControl);
 
-    // Helper function to get coordinates
+    // Hjelpefunksjon for å hente koordinater
     function getCoordinates(row) {
       if (row.Latitude && row.Longitude) {
-        return [parseFloat(row.Latitude), parseFloat(row.Longitude)];
-      }
+        return [parseFloat(row.Latitude), parseFloat(row.Longitude)]; // Henter koordinater fra Latitude og Longitude 
+      } // Bruker parseFloat for å konvertere til desimaltall
       return null;
     }
 
-    // Fetch ALL data in chunks using pagination
+    // fetchAllData funksjonen henter all data innenfor rektangelet
     async function fetchAllData(tableName, bounds, clusterGroup, color) {
       let allData = [];
       let from = 0;
       const chunkSize = 1000;
       let moreData = true;
 
-      while (moreData) {
+      while (moreData) { // Sorterer dataen så vi ikke henter unødvendig data
         const { data, error } = await supabase
           .from(tableName)
           .select('YearCollected, NorskNavn, Species, IndividualCount, Latitude, Longitude') // Velger kun relevante kolonner slik at vi ikke henter unødvendig data
@@ -116,14 +116,10 @@
           .lte('Longitude', bounds.getEast())
           .range(from, from + chunkSize - 1); // Henter i biter av 1000 som er maks grensen til Supabase
 
-        // if (error) {
-        //   console.error(`Error fetching ${tableName} data:`, error);
-        //   return;
-        // }
         if (error) {
           retryCount = 0;
         if (error.code === '57014' && retryCount < 3) {
-          console.warn(`Timeout fetching ${tableName} data. Retrying... (${retryCount + 1})`);
+          console.warn(`Timeout fetching ${tableName} data. Retrying... (${retryCount + 1})`); // Trenger retry siden vi henter store mengder data 
           return fetchAllData(tableName, bounds, clusterGroup, color, retryCount + 1);
         } else {
           console.error(`Error fetching ${tableName} data:`, error);
@@ -135,20 +131,20 @@
           allData = allData.concat(data);
           from += chunkSize;
         } else {
-          moreData = false; // Stop fetching if no more data
+          moreData = false; // Slutter å hente data hvis det ikke er mer
         }
       }
 
       addMarkers(allData, bounds, clusterGroup, color);
     }
 
-    // Add markers to the map within selected bounds
+    // Legger til markører i kartet
     function addMarkers(data, bounds, clusterGroup, color) {
-      clusterGroup.clearLayers(); // Remove old markers
+      clusterGroup.clearLayers(); // Fjerner gamle markører
 
       data.forEach(row => {
         const coords = getCoordinates(row);
-        if (coords && bounds.contains(coords)) { // Check if point is within the selected area
+        if (coords && bounds.contains(coords)) { // Sjekker om punktet er innenfor det valgte området
           const marker = L.circleMarker(coords, {
             radius: 8,
             fillColor: color,
@@ -156,7 +152,8 @@
             weight: 2,
             opacity: 1,
             fillOpacity: 0.8
-          }).bindPopup(`<b>Year:</b> ${row.YearCollected}<br>
+          }) // Lager popup med informasjon om funnet når trykket på
+          .bindPopup(`<b>Year:</b> ${row.YearCollected}<br>  
                         <b>Species:</b> ${row.Species}<br>
                         <b>Norsk Navn:</b> ${row.NorskNavn}<br>
                         <b>Individual Count:</b> ${row.IndividualCount}`);
@@ -167,15 +164,15 @@
       map.addLayer(clusterGroup);
     }
 
-    // When a rectangle is drawn, fetch all relevant data within bounds
+    // Henter data for alle arter innenfor rektangelet
     map.on(L.Draw.Event.CREATED, function (event) {
       let layer = event.layer;
-      drawnItems.clearLayers(); // Remove old areas
+      drawnItems.clearLayers(); // Fjerner gamle områder
       drawnItems.addLayer(layer);
 
-      let bounds = layer.getBounds(); // Get rectangle bounds
+      let bounds = layer.getBounds(); // Henter rektangelgrenser
 
-      fetchAllData('CRKritisk', bounds, crKritiskCluster, 'red');
+      fetchAllData('CRKritisk', bounds, crKritiskCluster, 'red'); // Henter fra Supabase og legger til markører i kartet
       fetchAllData('ENSterkt', bounds, enSterktCluster, 'blue');
       fetchAllData('HighRisk', bounds, highRiskCluster, 'gray');
       fetchAllData('SuperRisk', bounds, superRiskCluster, 'black');
