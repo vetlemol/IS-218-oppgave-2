@@ -18,6 +18,6 @@ Figur 2: Eksempel på informasjon som kommer opp ved å trykke på et valgt punk
 
 ![](Bilde3.png)
 
-Figur 3: Eksempel på informasjon som kommer opp ved å trykke på et valgt punkt. De grå prikkene viser høyt truende arter.
+Figur 3: Eksempel på informasjon som kommer opp ved å trykke på et valgt punkt. De svarte prikkene viser svært høyt truende arter for norsk natur.
 I Kristiansand sentrum finnes det både arter som utgjør en trussel mot norsk natur og arter som regnes som truede. Antall prikker i figurene indikerer et begrenset biomangfold i studentenes nærområde. Figur 2 viser at studentene har mulighet til å observere truede arter, som bulmeurt, i sitt nærområde. Dataene fra Figur 3 viser at studentene også kan komme i kontakt med truende arter som platanlønn. Det er viktig å merke seg at tallene er basert på eldre data og kan ha endret seg siden innsamlingen.
 Hele løsningen er satt sammen med standard webteknologier (HTML, CSS, JavaScript) og fokuserer på effektiv datahåndtering og brukervennlig visualisering, slik at brukere enkelt kan utforske artsmangfoldet i selvvalgte geografiske områder.
