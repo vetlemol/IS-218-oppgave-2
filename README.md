@@ -7,7 +7,7 @@ Problemstilling: Er det stor sannsynlighet for å se truede arter i studentenes 
 Vi har hentet datasett fra Geonorge, som er “ Rødlistearter” og har valgt ut kritisk truet og sterkt truet arter. Videre har vi brukt “Artkart fremmede arter” for å hente ut fremmede arter som kan være truende for norsk natur. Supabase fungerer som databasen som lagrer artsinformasjonen, mens kartvisningen er implementert med Leaflet sammen med utvidelsene markercluster for gruppering av markører og draw for å tegne områder. Filen Artsmangfold.html inneholder den aktuelle løsningen.
 
 Kartet initialiseres med Kristiansand som senterpunkt og setter opp fire ulike markercluster-grupper for forskjellige kategorier av arter basert på fare for utryddelse eller fare for norsk natur. Når brukeren tegner et rektangel på kartet, henter systemet data fra Supabase med serversidefiltrering som begrenser dataene til funn fra 2010 eller senere innenfor det spesifikke geografiske området, og kun henter relevant data fra radene.
-![](Oppgave2GiF.gif)
+![](Video.gif)
 
 Utifra kartet (se Figur 1) kan vi se at sannsynligheten for å se trude arter i Kristiansand sentrum er relativt stor. Arter blir representert i klynger, der man får oversikt over både truede og truende arter i området.
 
