@@ -31,3 +31,13 @@ Figur 4: Eksempel på informasjon som kommer opp ved å trykke på et valgt punk
 I Kristiansand sentrum finnes det både arter som utgjør en trussel mot norsk natur og arter som regnes som truede. Antall prikker i figurene indikerer et begrenset biomangfold i studentenes nærområde. Figur 3 viser at studentene har mulighet til å observere truede arter, som bulmeurt, i sitt nærområde. Dataene fra Figur 4 viser at studentene også kan komme i kontakt med truende arter som platanlønn. Det er viktig å merke seg at tallene er basert på eldre data og kan ha endret seg siden innsamlingen.
 
 Hele løsningen er satt sammen med standard webteknologier (HTML, CSS, JavaScript) og fokuserer på effektiv datahåndtering og brukervennlig visualisering, slik at brukere enkelt kan utforske artsmangfoldet i selvvalgte geografiske områder.
+
+
+
+Datasettene som er brukt for denne løsningen:
+
+Rødlistearter, som viser en oversikt over arter som er vurdert å ha en risiko for å dø ut i Norge
+https://kartkatalog.geonorge.no/metadata/roedlistearter/00b0ab63-de0b-4f12-ac40-655de5163b8d 
+
+Fremmedartlista, som tar for seg arter som er en trussel for norsk natur
+https://kartkatalog.geonorge.no/metadata/fremmedartlista/53f55741-c9b3-419b-bb86-15bd2a2413e1
