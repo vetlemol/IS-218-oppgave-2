@@ -1,5 +1,7 @@
 ## Endringer i oppgave 2
-README-filen i Github-repositoriet har blitt oppdatert med mer informasjon, inkludert lenke til datasettene som har blitt brukt og en oversikt over benyttede teknologier. Til forskjell fra forrige innlevering har oppgaven blitt skrevet inn i et dokument. I tillegg er det lagt ved en kort gif i mappeinnleveringen som viser applikasjonen i bruk. For å få bedre flyt har formatet blitt endret slik at teksten får en tydeligere struktur. 
+README-filen i Github-repositoriet har blitt oppdatert med mer informasjon, inkludert lenke til datasettene som har blitt brukt og en oversikt over benyttede teknologier. Til forskjell fra forrige innlevering har oppgaven blitt skrevet inn i et dokument. I tillegg er det lagt ved en kort GIF i README-filen som viser applikasjonen i bruk. For å få bedre flyt har formatet blitt endret slik at teksten får en tydeligere struktur.
+
+![](Video.gif)
 
 ## Oppgave 2: Geografiske IT-utvikling
 ### 1.0 Introduksjon
@@ -36,10 +38,6 @@ Hele løsningen er satt sammen med standard webteknologier som HTML, CSS, JavaSc
 ## 3.0 Konklusjon
 Kartløsningen viser hvordan geografiske informasjonssystemer kan brukes til å kartlegge truede og fremmede arter i et avgrenset område. Løsningen kan gi økt bevissthet rundt artsmangfoldet i Norge, selv om dataene kan være noe utdaterte.
 
-
-![](Video.gif)
-
-Figur 4 viser hvordan systemet brukes
 
 
 ## 4.0 Referanseliste
