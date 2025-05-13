@@ -37,6 +37,7 @@ Kartløsningen viser hvordan geografiske informasjonssystemer kan brukes til å 
 
 
 ![](Video.gif)
+
 Figur 4 viser hvordan systemet brukes
 
 
