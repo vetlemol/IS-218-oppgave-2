@@ -27,6 +27,7 @@ På kartet vises kritisk truede arter som røde punkter, mens de sterkt truede a
 Utklipp 2: Eksempel på informasjon som kommer opp ved å trykke på et valgt punkt. De blå punktene viser sterkt truede arter.
 
 ![](Bilde3.png)
+
 Utklipp 3: Eksempel på informasjon som kommer opp ved å trykke på et valgt punkt. De grå punktene viser høyt truende arter.
 
 I Kristiansand sentrum finnes det både arter som utgjør en trussel mot norsk natur og arter som regnes som truede. Antall punkter i figurene indikerer et begrenset biomangfold i studentenes nærområde. Utklipp 2 viser at studentene har mulighet til å observere truede arter, som bulmeurt, i sitt nærområde. Dataene fra Utklipp 3 viser at studentene også kan komme i kontakt med truende arter som platanlønn. Det er viktig å merke seg at tallene er basert på eldre data og kan ha endret seg siden innsamlingen.
